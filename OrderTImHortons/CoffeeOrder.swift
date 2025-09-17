@@ -36,18 +36,26 @@ struct CoffeeOrder: Identifiable, Codable, Equatable {
     let id: UUID
     let employeeName: String
     let coffeeType: String
+
+    enum CoffeeType: String, CaseIterable, Codable {
+        case latte = "Latte"
+        case cappuccino = "Cappuccino"
+        case espresso = "Espresso"
+        case americano = "Americano"
+        case mocha = "Mocha"
+    }
 }
 
-// Демо-данные при первом запуске
 extension CoffeeOrder {
     static let sampleOrders = [
-        CoffeeOrder(id: UUID(), employeeName: "Jain", coffeeType: "Latte"),
-        CoffeeOrder(id: UUID(), employeeName: "Maria", coffeeType: "Cappuccino"),
-        CoffeeOrder(id: UUID(), employeeName: "Alex", coffeeType: "Espresso"),
-        CoffeeOrder(id: UUID(), employeeName: "Olivia", coffeeType: "Americano"),
-        CoffeeOrder(id: UUID(), employeeName: "Serg", coffeeType: "Mocha")
+        CoffeeOrder(id: UUID(), employeeName: "Jain", coffeeType: CoffeeType.latte.rawValue),
+        CoffeeOrder(id: UUID(), employeeName: "Maria", coffeeType: CoffeeType.cappuccino.rawValue),
+        CoffeeOrder(id: UUID(), employeeName: "Alex", coffeeType: CoffeeType.espresso.rawValue),
+        CoffeeOrder(id: UUID(), employeeName: "Olivia", coffeeType: CoffeeType.americano.rawValue),
+        CoffeeOrder(id: UUID(), employeeName: "Serg", coffeeType: CoffeeType.mocha.rawValue)
     ]
 }
+
 
 
 

@@ -1,66 +1,51 @@
-//
-//  AddOrderView.swift
-//  OrderTImHortons
-//
-//  Created by Irina Saf on 2025-09-17.
-//
-
 import SwiftUI
 
 struct AddOrderView: View {
     @ObservedObject var viewModel: OrderViewModel
-    @State private var name = ""
-    @State private var coffee = "Latte"
-    @State private var errorMessage = ""
-    
-    let coffeeOptions = ["Latte", "Cappuccino", "Espresso", "Americano", "Mocha"]
-    
+    @Environment(\.dismiss) var dismiss
+
+    @State private var employeeName: String = ""
+    @State private var selectedCoffee: CoffeeOrder.CoffeeType = .latte
+
     var body: some View {
-        VStack(spacing: 20) {
-            TextField("Employee's name", text: $name)
-                .textFieldStyle(.roundedBorder)
-                .padding(.horizontal)
-            
-            Picker("Choose a coffee", selection: $coffee) {
-                ForEach(coffeeOptions, id: \.self) { type in
-                    Text(type).tag(type)
+        NavigationStack {
+            Form {
+                Section(header: Text("Employee")) {
+                    TextField("Enter name", text: $employeeName)
+                }
+
+                Section(header: Text("Coffee Type")) {
+                    Picker("Select coffee", selection: $selectedCoffee) {
+                        ForEach(CoffeeOrder.CoffeeType.allCases, id: \.self) { coffee in
+                            Text(coffee.rawValue).tag(coffee)
+                        }
+                    }
+                    .pickerStyle(.menu)
+                }
+
+                Section {
+                    Button("Save Order") {
+                        let newOrder = CoffeeOrder(
+                            id: UUID(),
+                            employeeName: employeeName,
+                            coffeeType: selectedCoffee.rawValue
+                        )
+                        viewModel.addOrder(newOrder)
+                        dismiss()
+                    }
+                    .disabled(employeeName.isEmpty)
                 }
             }
-            .pickerStyle(.wheel)
-            .frame(height: 150)
-            
-            if !errorMessage.isEmpty {
-                Text(errorMessage)
-                    .foregroundColor(.red)
+            .navigationTitle("Add New Order")
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") { dismiss() }
+                }
             }
-            
-            Button("Save the order") {
-                addOrderIfValid()
-            }
-            .padding()
-            .background(Color.blue.opacity(0.8))
-            .foregroundColor(.white)
-            .cornerRadius(10)
-            
-            Spacer()
         }
-        .padding()
-    }
-    
-    private func addOrderIfValid() {
-        guard !name.trimmingCharacters(in: .whitespaces).isEmpty else {
-            errorMessage = "Enter the employee's name"
-            return
-        }
-        
-        viewModel.addOrder(name: name, coffee: coffee)
-        name = ""
-        coffee = "Latte"
-        errorMessage = ""
     }
 }
 
-// Превью
 #Preview {
     AddOrderView(viewModel: OrderViewModel())
 }

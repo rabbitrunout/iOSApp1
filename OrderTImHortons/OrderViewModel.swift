@@ -1,43 +1,14 @@
-//
-//  OrderViewModel.swift
-//  OrderTImHortons
-//
-//  Created by Irina Saf on 2025-09-17.
-//
-
 import Foundation
-import Combine   // обязательно для ObservableObject и @Published
+import Combine  // <- обязательно для ObservableObject
 
 class OrderViewModel: ObservableObject {
-    @Published var orders: [CoffeeOrder] = [] {
-        didSet { saveOrders() }
-    }
-    
-    private let ordersKey = "coffeeOrders"
-    
-    init() {
-        loadOrders()
-    }
-    
-    func addOrder(name: String, coffee: String) {
-        let order = CoffeeOrder(id: UUID(), employeeName: name, coffeeType: coffee)
+    @Published var orders: [CoffeeOrder] = CoffeeOrder.sampleOrders
+
+    func addOrder(_ order: CoffeeOrder) {
         orders.append(order)
     }
-    
-    private func saveOrders() {
-        if let data = try? JSONEncoder().encode(orders) {
-            UserDefaults.standard.set(data, forKey: ordersKey)
-        }
-    }
-    
-    private func loadOrders() {
-        if let data = UserDefaults.standard.data(forKey: ordersKey),
-           let savedOrders = try? JSONDecoder().decode([CoffeeOrder].self, from: data) {
-            orders = savedOrders
-        } else {
-            orders = CoffeeOrder.sampleOrders
-        }
+
+    func deleteOrder(_ order: CoffeeOrder) {
+        orders.removeAll { $0.id == order.id }
     }
 }
-
-

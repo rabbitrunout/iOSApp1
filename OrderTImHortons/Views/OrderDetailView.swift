@@ -1,18 +1,27 @@
-//
-//  OrderDetailView.swift
-//  OrderTImHortons
-//
-//  Created by Irina Saf on 2025-09-17.
-//
-
 import SwiftUI
 
 struct OrderDetailView: View {
+    var order: CoffeeOrder
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(spacing: 30) {
+            Image(systemName: "cup.and.saucer.fill")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 150, height: 150)
+                .foregroundColor(.brown)
+            
+            Text(order.employeeName)
+                .font(.largeTitle)
+                .bold()
+            
+            Text(order.coffeeType)
+                .font(.title2)
+                .foregroundColor(.brown)
+            
+            Spacer()
+        }
+        .padding()
+        .navigationTitle("Order Details")
     }
-}
-
-#Preview {
-    OrderDetailView()
 }

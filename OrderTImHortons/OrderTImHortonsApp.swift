@@ -8,12 +8,14 @@
 import SwiftUI
 
 @main
-struct OrderTimHortonsApp: App {
+struct OrderTImHortonsApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(viewModel: OrderViewModel())
         }
     }
 }
+
+
 
 
