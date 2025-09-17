@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		805BBE622E7B0ACD00043DEA /* OrderTImHortons.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrderTImHortons.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		805BBE622E7B0ACD00043DEA /* OrderTImHortons.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = OrderTImHortons.app; path = "/Users/irinasaf/Desktop/iOS2025AM/OrderTImHortons/build/Debug-iphoneos/OrderTImHortons.app"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -33,16 +33,7 @@
 			isa = PBXGroup;
 			children = (
 				805BBE642E7B0ACD00043DEA /* OrderTImHortons */,
-				805BBE632E7B0ACD00043DEA /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		805BBE632E7B0ACD00043DEA /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				805BBE622E7B0ACD00043DEA /* OrderTImHortons.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -95,7 +86,7 @@
 			mainGroup = 805BBE592E7B0ACD00043DEA;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 805BBE632E7B0ACD00043DEA /* Products */;
+			productRefGroup = 805BBE592E7B0ACD00043DEA;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
