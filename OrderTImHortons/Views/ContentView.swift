@@ -1,42 +1,34 @@
-//
-//  ContentView.swift
-//  OrderTImHortons
-//
-//  Created by Irina Saf on 2025-09-17.
-//
-
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var viewModel = OrderViewModel()
-    
+    @StateObject private var viewModel = OrderViewModel()
+
     var body: some View {
         TabView {
-            WelcomeView(viewModel: viewModel)   // передаём viewModel
+            WelcomeView()
                 .tabItem {
                     Label("Welcome", systemImage: "house")
                 }
 
-            OrdersListView(viewModel: viewModel)  // список заказов
+            OrdersListView()
                 .tabItem {
                     Label("Orders", systemImage: "list.bullet")
                 }
 
-            AddOrderView(viewModel: viewModel)    // форма добавления
+            AddOrderView()
                 .tabItem {
                     Label("Add", systemImage: "plus.circle")
                 }
 
-            OrdersHistoryView(viewModel: viewModel)  // история заказов
+            OrdersHistoryView()
                 .tabItem {
                     Label("History", systemImage: "clock")
                 }
         }
+        .environmentObject(viewModel)
     }
 }
 
 #Preview {
     ContentView()
 }
-
-

@@ -1,62 +1,28 @@
-
-//  OrderHistory.swift
-//  OrderTImHortons
-//
-//  Created by Irina Saf on 2025-09-17.
-//
-
 import Foundation
 
-// Один день заказов
-struct OrderDay: Identifiable {
-    let id = UUID()
-    let date: Date
-    var orders: [CoffeeOrder] = []
-}
-
-// Хранилище истории заказов
-struct OrderHistory {
+struct OrdersHistoryStore {
     var orderDays: [OrderDay] = []
-    
+
     init() {
         #if DEBUG
         createDevData()
         #endif
     }
-    
+
     mutating func addOrder(_ order: CoffeeOrder) {
         let today = Date()
-        
-        if let firstDay = orderDays.first, today.isSameDay(as: firstDay.date) {
-            print("Добавлен заказ: \(order.employeeName) — \(order.coffeeType)")
-            orderDays[0].orders.append(order)
+        if let index = orderDays.firstIndex(where: { today.isSameDay(as: $0.date) }) {
+            orderDays[index].orders.append(order)
         } else {
-            orderDays.insert(
-                OrderDay(date: today, orders: [order]),
-                at: 0
-            )
+            orderDays.insert(OrderDay(date: today, orders: [order]), at: 0)
         }
     }
 }
 
-extension OrderHistory {
-    mutating func createDevData() {
-        let sampleOrders = [
-            CoffeeOrder(id: UUID(), employeeName: "Jain", coffeeType: "Latte"),
-            CoffeeOrder(id: UUID(), employeeName: "Maria", coffeeType: "Cappuccino"),
-            CoffeeOrder(id: UUID(), employeeName: "Alex", coffeeType: "Espresso")
-        ]
-        
-        orderDays = [
-            OrderDay(date: Date(), orders: sampleOrders)
-        ]
-    }
-}
-
-// 🔹 Хелпер для сравнения дат (как в твоём примере)
+// Вспомогательный extension для сравнения дат (без учёта времени)
 extension Date {
-    func isSameDay(as other: Date) -> Bool {
+    func isSameDay(as otherDate: Date) -> Bool {
         let calendar = Calendar.current
-        return calendar.isDate(self, inSameDayAs: other)
+        return calendar.isDate(self, inSameDayAs: otherDate)
     }
 }

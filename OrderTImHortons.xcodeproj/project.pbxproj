@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		805BBE622E7B0ACD00043DEA /* OrderTImHortons.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = OrderTImHortons.app; path = "/Users/irinasaf/Desktop/iOS2025AM/OrderTImHortons/build/Debug-iphoneos/OrderTImHortons.app"; sourceTree = "<absolute>"; };
+		8073F72A2E84346600EB1212 /* OrderTImHortons.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrderTImHortons.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		805BBE642E7B0ACD00043DEA /* OrderTImHortons */ = {
+		8073F7672E84364D00EB1212 /* OrderTImHortons */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = OrderTImHortons;
 			sourceTree = "<group>";
@@ -32,7 +32,8 @@
 		805BBE592E7B0ACD00043DEA = {
 			isa = PBXGroup;
 			children = (
-				805BBE642E7B0ACD00043DEA /* OrderTImHortons */,
+				8073F7672E84364D00EB1212 /* OrderTImHortons */,
+				8073F72A2E84346600EB1212 /* OrderTImHortons.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -52,13 +53,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				805BBE642E7B0ACD00043DEA /* OrderTImHortons */,
+				8073F7672E84364D00EB1212 /* OrderTImHortons */,
 			);
 			name = OrderTImHortons;
 			packageProductDependencies = (
 			);
 			productName = OrderTImHortons;
-			productReference = 805BBE622E7B0ACD00043DEA /* OrderTImHortons.app */;
+			productReference = 8073F72A2E84346600EB1212 /* OrderTImHortons.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -242,8 +243,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = A3LWML52M7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -273,9 +276,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=iphoneos*]" = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = A3LWML52M7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;

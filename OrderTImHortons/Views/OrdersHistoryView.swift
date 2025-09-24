@@ -1,42 +1,45 @@
-//
-//  OrdersHistoryView.swift
-//  OrderTImHortons
-//
-//  Created by Irina Saf on 2025-09-24.
-//
-
 import SwiftUI
 
 struct OrdersHistoryView: View {
-    @ObservedObject var viewModel: OrderViewModel
+    @EnvironmentObject var viewModel: OrderViewModel
 
-    var groupedOrders: [String: [CoffeeOrder]] {
-        Dictionary(grouping: viewModel.orders) { order in
-            let formatter = DateFormatter()
-            formatter.dateStyle = .medium
-            return formatter.string(from: order.date)
+    var groupedOrders: [(key: String, value: [CoffeeOrder])] {
+        let grouped = Dictionary(grouping: viewModel.orders) { order in
+            Self.dateLabel(for: order.date)
         }
+        return grouped.sorted { $0.key > $1.key }
     }
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
-                ForEach(groupedOrders.keys.sorted(by: >), id: \.self) { dateKey in
+                ForEach(groupedOrders, id: \.key) { dateKey, orders in
                     Section(header: Text(dateKey).font(.headline)) {
-                        ForEach(groupedOrders[dateKey] ?? []) { order in
-                            HStack {
-                                VStack(alignment: .leading) {
-                                    Text(order.employeeName)
-                                        .font(.body)
-                                        .bold()
-                                    Text(order.coffeeType)
-                                        .foregroundColor(.secondary)
+                        ForEach(orders) { order in
+                            NavigationLink(destination: ClientOrdersView(
+                                employeeName: order.employeeName,
+                                orders: viewModel.orders.filter { $0.employeeName == order.employeeName }
+                            )) {
+                                HStack {
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text(order.employeeName)
+                                            .font(.body)
+                                            .bold()
+                                        Text(order.coffeeType)
+                                            .foregroundColor(.secondary)
+                                    }
+                                    Spacer()
+                                    Image(systemName: order.iconName)
+                                        .foregroundColor(order.iconColor)
                                 }
-                                Spacer()
-                                Image(systemName: iconName(for: order.coffeeType))
-                                    .foregroundColor(.brown)
+                                .padding(.vertical, 6)
                             }
-                            .padding(.vertical, 5)
+                        }
+                        .onDelete { indexSet in
+                            for index in indexSet {
+                                let orderToDelete = orders[index]
+                                viewModel.deleteOrder(orderToDelete)  // 👈 удаление конкретного заказа
+                            }
                         }
                     }
                 }
@@ -45,14 +48,16 @@ struct OrdersHistoryView: View {
         }
     }
 
-    func iconName(for coffee: String) -> String {
-        switch coffee {
-        case "Latte": return "cup.and.saucer.fill"
-        case "Cappuccino": return "cup.and.saucer"
-        case "Espresso": return "takeoutbag.and.cup.and.straw.fill"
-        case "Americano": return "mug.fill"
-        case "Mocha": return "cup.and.saucer.fill"
-        default: return "cup.and.saucer"
+    private static func dateLabel(for date: Date) -> String {
+        let calendar = Calendar.current
+        if calendar.isDateInToday(date) {
+            return "Today"
+        } else if calendar.isDateInYesterday(date) {
+            return "Yesterday"
+        } else {
+            let formatter = DateFormatter()
+            formatter.dateStyle = .medium
+            return formatter.string(from: date)
         }
     }
 }

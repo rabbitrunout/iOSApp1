@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+struct OrderDay: Identifiable {
+    let id = UUID()
+    let date: Date
+    var orders: [CoffeeOrder] = []
+}

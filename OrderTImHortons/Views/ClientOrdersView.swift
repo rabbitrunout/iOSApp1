@@ -1,18 +1,34 @@
-//
-//  ClientOrdersView.swift
-//  OrderTImHortons
-//
-//  Created by Irina Saf on 2025-09-24.
-//
-
 import SwiftUI
 
 struct ClientOrdersView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+    let employeeName: String
+    let orders: [CoffeeOrder]
 
-#Preview {
-    ClientOrdersView()
+    var body: some View {
+        List {
+            ForEach(orders.sorted { $0.date > $1.date }) { order in
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text(order.coffeeType)
+                            .font(.headline)
+                        Text(Self.dateFormatter.string(from: order.date))
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                    Spacer()
+                    Image(systemName: order.iconName)
+                        .foregroundColor(order.iconColor)
+                }
+                .padding(.vertical, 4)
+            }
+        }
+        .navigationTitle("\(employeeName)'s Orders")
+    }
+
+    private static let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        return formatter
+    }()
 }

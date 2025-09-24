@@ -2,8 +2,6 @@
 //  OrderTImHortonsApp.swift
 //  OrderTImHortons
 //
-//  Created by Irina Saf on 2025-09-17.
-//
 
 import SwiftUI
 
@@ -11,11 +9,7 @@ import SwiftUI
 struct OrderTImHortonsApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView(viewModel: OrderViewModel())
+            ContentView() // 👈 без аргументов!
         }
     }
 }
-
-
-
-
