@@ -2,11 +2,11 @@ import SwiftUI
 
 struct AddOrderView: View {
     @EnvironmentObject var viewModel: OrderViewModel
-    @Environment(\.dismiss) private var dismiss   // для закрытия Sheet
+    @Environment(\.dismiss) private var dismiss   // for close Sheet
     
     @State private var employeeName: String = ""
     @State private var selectedCoffee: String = "Latte"
-    @State private var showToast = false          // 👈 состояние для тоста
+    @State private var showToast = false          // 👈
     
     let coffeeTypes = ["Latte", "Cappuccino", "Espresso", "Americano", "Mocha"]
     
@@ -40,7 +40,7 @@ struct AddOrderView: View {
                 .navigationTitle("New Order")
             }
             
-            // 👇 Toast поверх всего
+            // 👇 Toast on top of everything
             if showToast {
                 VStack {
                     Spacer()
@@ -67,19 +67,19 @@ struct AddOrderView: View {
         let newOrder = CoffeeOrder(employeeName: employeeName, coffeeType: selectedCoffee)
         viewModel.addOrder(newOrder)
         
-        // сброс формы
+        // form reset
         employeeName = ""
         selectedCoffee = coffeeTypes.first ?? "Latte"
         
-        // показать toast
+        // show toast
         showToast = true
         
-        // закрыть toast и форму через 2 секунды
+        // close the toast and the form in 2 seconds
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             withAnimation {
                 showToast = false
             }
-            dismiss() // закрыть AddOrderView → вернуться к списку
+            dismiss() // close AddOrderView → return to the list
         }
     }
 }

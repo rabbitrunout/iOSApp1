@@ -9,7 +9,7 @@ import SwiftUI
 struct OrderTImHortonsApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView() // 👈 без аргументов!
+            ContentView() // 👈 without arguments!
         }
     }
 }

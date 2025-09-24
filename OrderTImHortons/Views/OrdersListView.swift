@@ -13,7 +13,7 @@ struct OrdersListView: View {
                     }
                 }
                 .onDelete { indexSet in
-                    viewModel.deleteOrder(at: indexSet)  // 👈 ВАЖНО: вызываем функцию явно
+                    viewModel.deleteOrder(at: indexSet)  // 👈 IMPORTANT: we call the function explicitly
                 }
             }
             .listStyle(.insetGrouped)

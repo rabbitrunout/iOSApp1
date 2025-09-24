@@ -38,7 +38,7 @@ struct OrdersHistoryView: View {
                         .onDelete { indexSet in
                             for index in indexSet {
                                 let orderToDelete = orders[index]
-                                viewModel.deleteOrder(orderToDelete)  // 👈 удаление конкретного заказа
+                                viewModel.deleteOrder(orderToDelete)  // 👈 deleting a specific order
                             }
                         }
                     }

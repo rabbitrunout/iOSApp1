@@ -19,7 +19,7 @@ struct OrdersHistoryStore {
     }
 }
 
-// Вспомогательный extension для сравнения дат (без учёта времени)
+//Auxiliary extension for comparing dates (excluding time)
 extension Date {
     func isSameDay(as otherDate: Date) -> Bool {
         let calendar = Calendar.current
